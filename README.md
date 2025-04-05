@@ -1,18 +1,8 @@
 # Apollonius Weighted Voronoi
 
-**Apollonius (additively weighted) Voronoi diagram** with bounded faces extraction — powered by **CGAL** and **pybind11**, wrapped for Python.
+Additively weighted Voronoi diagram with bounded faces extraction — powered by CGAL and pybind11, wrapped for Python.
 
----
 
-## Features
-
-- Weighted Voronoi diagram (Apollonius diagram)
-- Extraction of only **bounded faces** (finite cells)
-- Ready-to-use **Python bindings** via `pybind11`
-- Built on **CGAL**, compiled as `.pyd` for Python
-- Fast and robust geometric computation
-
----
 
 ## Requirements
 
@@ -25,7 +15,7 @@
   - `boost-system`
 - [pybind11](https://github.com/pybind/pybind11) cloned locally
 
----
+
 
 ## How to Use
 
@@ -42,10 +32,28 @@ cells = wv.build_apollonius_polygons(points, radii)
 **Arguments:**
 
 - `points`: list of 2D coordinates, e.g. `[(x1, y1), (x2, y2), ...]`
-- `radii`: list of weights (same length as `points`), e.g. `[w1, w2, ...]`
+- `weights`: list of weights (same length as `points`), e.g. `[w1, w2, ...]`
 
 **Returns:**
 
 A list of `VoronoiCell` objects with:
 - `.index`: index of the cell (int)
 - `.boundary`: polygon boundary as list of `(x, y)` coordinates (list of tuples)
+
+> If you need to **crop cells to a bounding box**, do it manually (see `example/weighted_diagram_demo.py` for reference).
+
+
+
+## Example
+
+Example script: [weighted_diagram_demo.py](example/weighted_diagram_demo.py) (builds and visualizes a diagram)
+<p align="center">
+  <img src="example/diagram_base.png" alt="Classic Voronoi diagram (all weights = 0)" width="49%"/>
+  <img src="example/diagram.png" alt="Apollonius Voronoi diagram" width="49%"/>
+</p>
+
+
+
+## Acknowledgements
+
+This project draws initial inspiration from a code fragment discussed on [StackOverflow](https://stackoverflow.com/questions/18274584/cgal-2d-apollonius-diagram-for-weighted-voronoi-how-to-generate-and-get-the-fa). The current implementation was significantly refactored, extended, and wrapped with pybind11 for Python interoperability.
